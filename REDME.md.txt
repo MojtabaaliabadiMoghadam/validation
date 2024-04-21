@@ -1,0 +1,71 @@
+Validation Class
+this validation helps to validate your element 
+Installation
+
+To use the Validation class, include the following script in your HTML file:
+
+html
+
+<script src="path/to/Validation.js"></script>
+
+Creating a Validation Instance
+
+To create an instance of the Validation class, provide the ID of the form you want to validate and any optional configuration settings:
+
+javascript
+
+// Example instantiation of Validation class
+const validator = new Validation('formId', {
+  // Optional configuration settings
+  class_is_invalid: 'is-invalid',
+  class_is_valid: 'is-valid',
+  element_box_error: 'div',
+  // Add more settings as needed
+});
+ 
+if you dont have any  Optional configuration settings default configuration will be set
+
+Define Validation Rules
+
+Validation rules can be defined using HTML attributes on form elements:
+
+html
+
+<form id="formId">
+  <input type="text" name="username" data-validation="required|min:3|max:20">
+  <!-- Add other form fields with data-validation attributes -->
+  <button type="submit">Submit</button>
+</form>
+
+In the above example, the data-validation attribute specifies multiple rules separated by a pipe | for a username field. Rules include required, min, and max.
+Customizing Error Messages
+
+Error messages for various validation rules can be customized in the messages object:
+
+javascript
+
+// Customize error messages
+const validator = new Validation('formId', {
+  // Other options...
+  messages: {
+    required: 'Please fill in the :attribute field',
+    min: 'Minimum length for :attribute is :min characters',
+    // Add more customized messages as needed
+  },
+});
+
+Checking Form Validity
+
+To check the validity of the entire form:
+
+javascript
+
+// Example usage to check form validity
+const formIsValid = validator.is_valid_input(document.getElementById('formId').querySelectorAll('input'));
+console.log(formIsValid); // Returns true if the form is valid, false otherwise
+
+This method (is_valid_input) accepts an array of input elements and performs validation on each input based on its defined rules.
+Additional Notes
+
+    Custom Rules: Users can add their custom validation rules by extending the rules_validations object inside the class.
+    Styling: The class adds class_is_invalid and class_is_valid classes to inputs based on their validation status, which can be used for styling purposes.
